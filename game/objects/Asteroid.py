@@ -116,9 +116,20 @@ class Asteroid:
     def queue_detonation(self, ticks):
         self.detonation_task = asyncio.ensure_future(self.detonation_coro(ticks))
 
-
 async def AsteroidGenerationLoop():
     while True:
         await asyncio.sleep(2/LEVEL.get())
         await GAME.wait()
         Asteroid()
+
+async def lookout_for_new_game():
+    while True:
+        await NEW_GAME_EVENT.wait()
+        loop_task.cancel()
+        loop_task = asyncio.ensure_future(AsteroidGenerationLoop())
+
+loop_task = None
+
+def START_LOOP():
+    loop_task = asyncio.ensure_future(AsteroidGenerationLoop())
+    asyncio.ensure_future(lookout_for_new_game())
