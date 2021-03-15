@@ -103,7 +103,7 @@ class Asteroid:
             self.delete()
             # print("Asteroid exploded")
 
-    async def queue_detonation(self, ticks):
+    def queue_detonation(self, ticks):
         self.detonation_task = asyncio.ensure_future(self.detonation_coro(ticks))
         
     def delete(self):
