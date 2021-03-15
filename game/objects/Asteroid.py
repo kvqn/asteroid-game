@@ -122,14 +122,10 @@ async def AsteroidGenerationLoop():
         await GAME.wait()
         Asteroid()
 
-async def lookout_for_new_game():
+
+async def START_LOOP():
+    loop_task = asyncio.ensure_future(AsteroidGenerationLoop())
     while True:
         await NEW_GAME_EVENT.wait()
         loop_task.cancel()
         loop_task = asyncio.ensure_future(AsteroidGenerationLoop())
-
-loop_task = None
-
-def START_LOOP():
-    loop_task = asyncio.ensure_future(AsteroidGenerationLoop())
-    asyncio.ensure_future(lookout_for_new_game())
