@@ -50,8 +50,8 @@ class Asteroid:
                     j = i
         if j:
             ticks = (j.y_coord.value - self.y_coord.value)//24
-            asyncio.ensure_future(self.queue_detonation(ticks))
-            asyncio.ensure_future(j.queue_detonation(ticks))
+            self.queue_detonation(ticks)
+            j.queue_detonation(ticks)
             active_beams.remove(j)
         else:
             active_asteroids.add(self)
@@ -61,11 +61,13 @@ class Asteroid:
     async def lookout_for_new_game_event(self):
         await NEW_GAME_EVENT.wait()
         self.update_task.cancel()
-        self.delete()
         try:
             self.detonation_task.cancel()
         except:
             pass
+        self.delete()
+        canvas.delete(self.tag)
+        del self
             
 
     async def update_coords(self):
@@ -82,7 +84,12 @@ class Asteroid:
             except KeyError:
                 pass
             # print("Destroyed Asteroid.")
-            self.delete()
+            self.lookout_task.cancel()
+            try:
+                self.detonation_task.cancel()
+            except:
+                pass
+            del self
     
     async def detonation_coro(self, ticks):
         for _ in range(ticks):
@@ -100,17 +107,14 @@ class Asteroid:
                 await GAME.wait()
 
         except StopIteration:
-            self.delete()
+            self.update_task.cancel()
+            self.lookout_task.cancel()
+            canvas.delete(self.tag)
             # print("Asteroid exploded")
+            del self
 
     def queue_detonation(self, ticks):
         self.detonation_task = asyncio.ensure_future(self.detonation_coro(ticks))
-        
-    def delete(self):
-        self.update_task.cancel()
-        self.lookout_task.cancel()
-        canvas.delete(self.tag)
-        del self
 
 
 async def AsteroidGenerationLoop():
