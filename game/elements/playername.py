@@ -25,7 +25,7 @@ def submit_player_name():
     from ..events.start_game import start_game
     asyncio.ensure_future(start_game())
     GAME.set()
-    print('got playername')
+    # print('got playername')
 
 def init():
     GAME.clear()
@@ -33,6 +33,6 @@ def init():
     player_name_input_entry.place(x=670, y=300)
     root.bind("<Return>", lambda e : submit_player_name())
     player_name_input_submit_button.place(x=730, y=400)
-    print('getting playername')
+    # print('getting playername')
 
 player_name_input_submit_button = tkinter.Button(root, activebackground='grey42', bg = 'gray69', font = ("LLPixel", 20), text = "SUBMIT", command = submit_player_name)

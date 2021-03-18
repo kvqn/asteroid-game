@@ -51,7 +51,7 @@ root = tkinter.Tk()
 root.geometry("1600x1000")
 root.resizable(width=False, height=False)
 root.configure(bg='black')
-print(10)
+# print(10)
 NEW_GAME_EVENT = asyncio.Event()
 GAME = asyncio.Event()
 
@@ -85,6 +85,6 @@ def START():
     from .elements import Init
     asyncio.ensure_future(main_update_loop())
     root.update()
-    print(1)
+    # print(1)
     Init()
     loop.run_forever()

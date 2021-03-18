@@ -12,7 +12,7 @@ def init():
     level_heading_label.place(x=80, y=500)
     level_indicator_label.place(x=110, y=550)
     asyncio.ensure_future(lookout_for_new_game())
-    print('level loaded')
+    # print('level loaded')
 
 async def lookout_for_new_game():
     while True:

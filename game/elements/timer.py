@@ -13,7 +13,7 @@ def init():
     Timer_Label.place(x=400, y = 920)
     asyncio.ensure_future(update_loop())
     asyncio.ensure_future(lookout_for_new_game())
-    print('timer loaded')
+    # print('timer loaded')
 
 async def update_loop():
     from ..events.start_game import start_time

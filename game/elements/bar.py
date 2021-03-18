@@ -30,7 +30,7 @@ def init():
     canvas.place(x=800, y=920)
     asyncio.ensure_future(update_loop())
     asyncio.ensure_future(lookout_for_new_game())
-    print('bar loaded')
+    # print('bar loaded')
 
 async def update_loop():
     global bar_x
