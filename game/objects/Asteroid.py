@@ -65,7 +65,6 @@ class Asteroid:
             self.detonation_task.cancel()
         except:
             pass
-        self.delete()
         canvas.delete(self.tag)
         del self
             
