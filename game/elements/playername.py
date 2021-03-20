@@ -20,8 +20,8 @@ def submit_player_name():
     player_name_input_entry.place_forget()
     player_name_input_entry.configure(state='disabled')
     player_name_input_submit_button.place_forget()
-    player_name_heading_label.place(x=1320, y=600)
-    player_name_display_label.place(x=1310, y=700)
+    player_name_heading_label.place(x=1330, y=600)
+    player_name_display_label.place(x=1330, y=700)
     from ..events.start_game import start_game
     asyncio.ensure_future(start_game())
     GAME.set()

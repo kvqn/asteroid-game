@@ -8,5 +8,5 @@ async def start_game():
     from ..objects.Ship import ship
     from ..objects.Asteroid import START_LOOP
     asyncio.ensure_future(START_LOOP())
-    canvas.place(x=300,y=100)
+    canvas.place(x=320,y=100)
     root.lift(canvas)
