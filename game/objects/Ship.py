@@ -18,7 +18,6 @@ class Ship:
         self.velocity_down = False
         self.velocity_left = False
         self.velocity_right = False
-        self.is_game_over = False
         self.update_future = asyncio.ensure_future(self.update_coords_loop())
         self.lookout_future = asyncio.ensure_future(self.lookout_for_new_game_event())
         self.bind()
@@ -82,7 +81,9 @@ class Ship:
     async def lookout_for_new_game_event(self):
         while True:
             await NEW_GAME_EVENT.wait()
-            self.update_future.cancel()
+            # self.update_future.cancel()
+            self.x_coord.value = 500
+            self.y_coord.value = 500
 
     def press_up(self, e):
         self.velocity_up = True
@@ -123,10 +124,8 @@ class Ship:
                 self.x_coord+=8
             for i in active_asteroids:
                 if -80 < self.x_coord.value - i.x_coord < 100 and -80 < self.y_coord.value - i.y_coord.value < 100:
-                    if not self.is_game_over:
-                        self.is_game_over = True
-                        asyncio.ensure_future(game_over())
-                        break
+                    asyncio.ensure_future(game_over())
+                    break
             canvas.coords(self.object, self.x_coord.value, self.y_coord.value)
     def shoot_laser(self, e):
         if can_i_shoot_laser():
