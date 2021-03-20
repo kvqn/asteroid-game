@@ -2,7 +2,6 @@ import asyncio
 from time import time
 from .. import root, canvas
 from ..events.pause_game import pause_game
-start_time = time()
 
 async def start_game():    
     root.bind("<Escape>", pause_game)

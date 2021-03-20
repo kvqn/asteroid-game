@@ -16,13 +16,18 @@ def init():
     # print('timer loaded')
 
 async def update_loop():
-    from ..events.start_game import start_time
+    # from ..events.start_game import start_time
     from .level import LEVEL
+    mins, secs = 0,0
     while True:
         await asyncio.sleep(1)
         await GAME.wait()
-        mins, secs = divmod(int(time() - start_time), 60)
-        time_stringvar.set('{:02d}:{:02d}'.format(mins, secs))
+        secs +=1
+        if secs==60:
+            secs=0
+            mins+=1
+        # mins, secs = divmod(int(time() - start_time), 60)
+        time_stringvar.set(f"{mins}:{secs}")
         if mins*4 + secs/15 >= LEVEL.get():
             asyncio.ensure_future(create_image_animated_effect(x=300, y=300, image_object=level_up_image, small_tick_delay=4, big_tick_delay=40))
             LEVEL.set(LEVEL.get()+1)
