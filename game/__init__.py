@@ -1,8 +1,9 @@
+import tkinter
+root = tkinter.Tk()
 from .install import INSTALL
 
 INSTALL()
 
-import tkinter
 import asyncio
 import pickle
 from time import time
@@ -50,7 +51,7 @@ class RangedInteger:
             raise OutOfBounds
         return self
 
-root = tkinter.Tk()
+
 root.geometry("1600x1000")
 root.resizable(width=False, height=False)
 root.configure(bg='black')
