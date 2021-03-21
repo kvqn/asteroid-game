@@ -1,7 +1,13 @@
+try:
+    from PIL import Image, ImageTk
+except ImportError:
+    from os import system
+    system("pip3 install pillow")
+    from PIL import Image, ImageTk
+
 import tkinter
 import asyncio
 import pickle
-from PIL import Image, ImageTk
 from time import time
 
 
