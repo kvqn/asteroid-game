@@ -1,15 +1,12 @@
-try:
-    from PIL import Image, ImageTk
-except ImportError:
-    from os import system
-    system("pip3 install pillow")
-    from PIL import Image, ImageTk
+from .install import INSTALL
+
+INSTALL()
 
 import tkinter
 import asyncio
 import pickle
 from time import time
-
+from PIL import Image, ImageTk
 
 def Get_Image(file):
     return ImageTk.PhotoImage(Image.open(file))
