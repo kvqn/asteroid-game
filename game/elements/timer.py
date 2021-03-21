@@ -29,7 +29,7 @@ async def update_loop():
         # mins, secs = divmod(int(time() - start_time), 60)
         time_stringvar.set("{:02d}:{:02d}".format(mins, secs))
         if mins*4 + secs/15 >= LEVEL.get():
-            asyncio.ensure_future(create_image_animated_effect(x=300, y=300, image_object=level_up_image, small_tick_delay=4, big_tick_delay=40))
+            asyncio.ensure_future(animated_effect(x=300, y=300, image_object=level_up_image, small_tick_delay=4, big_tick_delay=40))
             LEVEL.set(LEVEL.get()+1)
 
 async def lookout_for_new_game():
@@ -38,7 +38,7 @@ async def lookout_for_new_game():
         await NEW_GAME_EVENT.wait()
         mins, secs = 0,0
 
-async def create_image_animated_effect(x, y, image_object, small_tick_delay, big_tick_delay):
+async def animated_effect(x, y, image_object, small_tick_delay, big_tick_delay):
     small_tick_delay=0.01*small_tick_delay
     big_tick_delay=0.01*big_tick_delay
     await asyncio.sleep(small_tick_delay)
