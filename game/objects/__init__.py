@@ -1,7 +1,7 @@
 class OutOfBounds(Exception):
     pass
 
-class RangedInteger: # An integer class that is useful for kee
+class RangedInteger: # An integer class that is used as coordinates.
     def __init__(self, min, max, value, raise_border_exceptions = False):
         self.min = min
         self.max = max

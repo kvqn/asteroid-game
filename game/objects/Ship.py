@@ -1,9 +1,10 @@
 import asyncio
-from .. import RangedInteger, root, Get_Image, canvas, NEW_GAME_EVENT, active_asteroids, GAME
+from .. import root, Get_Image, canvas, NEW_GAME_EVENT, active_asteroids, GAME
 from .Laser import Laser_Beam
 from ..events.game_over import game_over
 from ..events.pause_game import pause_game, resume_game
 from ..elements.bar import can_i_shoot_laser
+from . import RangedInteger
 
 
 ship_image = Get_Image("assets/ship_final.png")
@@ -22,7 +23,7 @@ class Ship:
         self.lookout_future = asyncio.ensure_future(self.lookout_for_new_game_event())
         self.bind()
 
-    def bind(self):
+    def bind(self): # Binding keys to functions
         root.bind("<KeyPress-Up>", self.press_up)
         root.bind("<KeyPress-Down>", self.press_down)
         root.bind("<KeyPress-Left>", self.press_left)
@@ -49,7 +50,7 @@ class Ship:
         root.bind("<KeyRelease-D>", self.release_right)
         root.bind("<KeyPress-space>", self.shoot_laser)
     
-    def unbind(self):
+    def unbind(self): # Unbinding keys to functions
         root.unbind("<KeyPress-Up>")
         root.unbind("<KeyPress-Down>")
         root.unbind("<KeyPress-Left>")

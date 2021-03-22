@@ -2,6 +2,10 @@ import subprocess
 from tkinter import font
 
 def INSTALL():
+
+    # Installing PIL if not already installed.
+    # PIL is an imaging library that is used here for loading of saved images.
+
     try:
         import PIL
     except ImportError:
@@ -16,6 +20,9 @@ def INSTALL():
             exit()
 
         print("Success.")
+
+    # Installing font if not already installed.
+    # LLPixel3 is the main font used throughout the game because of its pixelated look.
     
     if "LLPixel" not in font.families():
         print("Font not installed. Installing now.")

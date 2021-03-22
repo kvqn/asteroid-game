@@ -35,7 +35,7 @@ async def lookout_for_new_game():
         await NEW_GAME_EVENT.wait()
         mins, secs = 0,0
 
-async def animated_effect(x, y, image_object, small_tick_delay, big_tick_delay):
+async def animated_effect(x, y, image_object, small_tick_delay, big_tick_delay): # Flashing level up text
     small_tick_delay=0.01*small_tick_delay
     big_tick_delay=0.01*big_tick_delay
     await asyncio.sleep(small_tick_delay)

@@ -25,7 +25,7 @@ async def lookout_for_new_game():
     
 
 def evaluate_highscores():
-    HIGHSCORES = list(DATA.highscores.items())
+    HIGHSCORES = list(DATA.items())
     HIGHSCORES.sort(reverse=True, key= lambda e : e[1])
     _ = 0
     for i in HIGHSCORES:

@@ -5,7 +5,7 @@ from .. import Get_Image, root, canvas, NEW_GAME_EVENT, loop, GAME, active_aster
 
 game_over_image = Get_Image("assets/game_over.png")
 
-async def game_over():
+async def game_over(): # called when ship collides with asteroid
     GAME.clear()
     root.unbind("<Escape>")
     global game_over_image_tag
@@ -18,7 +18,7 @@ async def game_over():
 from ..elements import save_data
 from .pause_game import pause_game
 
-def game_over_retry():
+def game_over_retry(): # called when player hits retry
     save_data()
     root.bind("<Escape>", pause_game)
     active_beams.clear()

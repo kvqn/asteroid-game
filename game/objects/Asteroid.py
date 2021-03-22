@@ -5,6 +5,8 @@ from .. import Get_Image, active_beams, active_asteroids, NEW_GAME_EVENT, canvas
 from ..elements.level import LEVEL
 from . import RangedInteger, OutOfBounds
 
+# Loading images
+
 asteroid_images = (
     Get_Image("assets/asteroids/asteroid_1.png"),
     Get_Image("assets/asteroids/asteroid_2.png"),
@@ -36,7 +38,7 @@ explosion_images = (
 
 level_up_image = Get_Image("assets/level_up.png")
 
-class Asteroid:
+class Asteroid: # Asteroid class that takes care of all its properties
     def __init__(self):
         self.x_coord = randint(80, 800)
         self.y_coord = RangedInteger(min=-300, max=1200, value=-200, raise_border_exceptions=True)
@@ -113,7 +115,7 @@ class Asteroid:
     def queue_detonation(self, ticks):
         self.detonation_task = asyncio.ensure_future(self.detonation_coro(ticks))
 
-async def AsteroidGenerationLoop():
+async def AsteroidGenerationLoop(): # Generates asteroid
     while True:
         await asyncio.sleep(2/LEVEL.get())
         await GAME.wait()

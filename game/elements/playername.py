@@ -22,11 +22,11 @@ def submit_player_name():
     player_name_display_label.place(x=1330, y=700)
     from ..events.start_game import start_game
     asyncio.ensure_future(start_game())
-    GAME.set()
+    GAME.set() # Resuming game
 
 def init():
-    GAME.clear()
-    player_name_input_label.place(x=620, y=200)
+    GAME.clear() # Pausing game
+    player_name_input_label.place(x=620, y=200) # Getting playername
     player_name_input_entry.place(x=670, y=300)
     root.bind("<Return>", lambda e : submit_player_name())
     player_name_input_submit_button.place(x=730, y=400)

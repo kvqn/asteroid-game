@@ -5,7 +5,7 @@ from . import RangedInteger, OutOfBounds
 
 laser_image = Get_Image("assets/beam.png")
 
-class Laser_Beam:
+class Laser_Beam: # Laser class that takes care of all its properties
     def __init__(self):
         from .Ship import ship
         self.x_coord = ship.x_coord.value + 50

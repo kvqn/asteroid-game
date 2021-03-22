@@ -2,6 +2,8 @@ import tkinter
 import asyncio
 from .. import Get_Image, root, NEW_GAME_EVENT, GAME
 
+
+
 bar_images = [
     Get_Image("assets/bar/bar_0.png"),
     Get_Image("assets/bar/bar_1.png"),
