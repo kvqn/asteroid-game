@@ -1,6 +1,7 @@
 import asyncio
-from .. import Get_Image, RangedInteger, active_asteroids, active_beams, canvas, NEW_GAME_EVENT, OutOfBounds, GAME
+from .. import Get_Image, active_asteroids, active_beams, canvas, NEW_GAME_EVENT, GAME
 from ..elements.score import SCORE
+from . import RangedInteger, OutOfBounds
 
 laser_image = Get_Image("assets/beam.png")
 

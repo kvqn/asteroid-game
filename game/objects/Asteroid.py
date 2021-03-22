@@ -1,8 +1,9 @@
 import tkinter
 import asyncio
 from random import randint, choice
-from .. import Get_Image, RangedInteger, active_beams, active_asteroids, NEW_GAME_EVENT, canvas, OutOfBounds, root, GAME
+from .. import Get_Image, active_beams, active_asteroids, NEW_GAME_EVENT, canvas, root, GAME
 from ..elements.level import LEVEL
+from . import RangedInteger, OutOfBounds
 
 asteroid_images = (
     Get_Image("assets/asteroids/asteroid_1.png"),

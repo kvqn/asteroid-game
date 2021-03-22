@@ -12,46 +12,6 @@ from PIL import Image, ImageTk
 def Get_Image(file):
     return ImageTk.PhotoImage(Image.open(file))
 
-class OutOfBounds(Exception):
-    pass
-
-class RangedInteger:
-    def __init__(self, min, max, value, raise_border_exceptions = False):
-        self.min = min
-        self.max = max
-        self.value = value
-        self.flag = raise_border_exceptions
-    
-    def __add__(self, val):
-        if self.min <= self.value + val <= self.max:
-            self.value += val
-        elif self.flag:
-            raise OutOfBounds
-        return self
-            
-
-    def __iadd__(self, val):
-        if self.min <= self.value + val <= self.max:
-            self.value += val
-        elif self.flag:
-            raise OutOfBounds
-        return self
-        
-    def __sub__(self, val):
-        if self.min <= self.value - val <= self.max:
-            self.value -= val
-        elif self.flag:
-            raise OutOfBounds
-        return self
-    
-    def __isub__(self, val):
-        if self.min <= self.value - val <= self.max:
-            self.value -= val
-        elif self.flag:
-            raise OutOfBounds
-        return self
-
-
 root.geometry("1600x1000")
 root.resizable(width=False, height=False)
 root.configure(bg='black')
