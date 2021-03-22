@@ -3,11 +3,7 @@ import asyncio
 import pickle
 from .. import Get_Image, root, canvas, NEW_GAME_EVENT, loop, GAME, active_asteroids, active_beams
 
-
 game_over_image = Get_Image("assets/game_over.png")
-
-# NEW_GAME_EVENT = asyncio.Event()
-
 
 async def game_over():
     GAME.clear()
@@ -27,7 +23,6 @@ def game_over_retry():
     root.bind("<Escape>", pause_game)
     active_beams.clear()
     active_asteroids.clear()
-    # evaluate_highscores()
     global game_over_image_tag
     canvas.delete(game_over_image_tag)
     game_over_button1.place_forget()
@@ -35,7 +30,6 @@ def game_over_retry():
     NEW_GAME_EVENT.set()
     NEW_GAME_EVENT.clear()
     GAME.set()
-    # asyncio.ensure_future(START_GAME())
 
 from .pause_game import save_and_quit
 

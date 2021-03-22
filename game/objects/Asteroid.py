@@ -82,7 +82,6 @@ class Asteroid:
                 active_asteroids.remove(self)
             except KeyError:
                 pass
-            # print("Destroyed Asteroid.")
             self.lookout_task.cancel()
             try:
                 self.detonation_task.cancel()
@@ -94,7 +93,6 @@ class Asteroid:
         for _ in range(ticks):
             await asyncio.sleep(0.02)
             await GAME.wait()
-        # Loading destroy animation
         self.explosion_images = iter(explosion_images)
         self.x_coord -= 40
         self.y_coord -= 40
@@ -109,7 +107,6 @@ class Asteroid:
             self.update_task.cancel()
             self.lookout_task.cancel()
             canvas.delete(self.tag)
-            # print("Asteroid exploded")
             del self
 
     def queue_detonation(self, ticks):

@@ -21,7 +21,6 @@ class Ship:
         self.update_future = asyncio.ensure_future(self.update_coords_loop())
         self.lookout_future = asyncio.ensure_future(self.lookout_for_new_game_event())
         self.bind()
-        # print("ship initialised")
 
     def bind(self):
         root.bind("<KeyPress-Up>", self.press_up)
@@ -51,7 +50,6 @@ class Ship:
         root.bind("<KeyPress-space>", self.shoot_laser)
     
     def unbind(self):
-        # root.bind("<Escape>", resume_game)
         root.unbind("<KeyPress-Up>")
         root.unbind("<KeyPress-Down>")
         root.unbind("<KeyPress-Left>")
@@ -81,7 +79,6 @@ class Ship:
     async def lookout_for_new_game_event(self):
         while True:
             await NEW_GAME_EVENT.wait()
-            # self.update_future.cancel()
             self.x_coord.value = 500
             self.y_coord.value = 500
 
@@ -110,7 +107,6 @@ class Ship:
         self.velocity_right = False
 
     async def update_coords_loop(self):
-        # print("test2")
         while True:
             await asyncio.sleep(0.02)
             await GAME.wait()

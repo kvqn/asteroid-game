@@ -10,7 +10,6 @@ def init():
     ScoreHeadingLabel.place(x=1380, y=90)
     ScoreLabel.place(x=1390, y=150)
     asyncio.ensure_future(lookout_for_new_game())
-    # print('score loaded')
 
 async def lookout_for_new_game():
     while True:

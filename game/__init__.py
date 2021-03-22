@@ -55,7 +55,6 @@ class RangedInteger:
 root.geometry("1600x1000")
 root.resizable(width=False, height=False)
 root.configure(bg='black')
-# print(10)
 NEW_GAME_EVENT = asyncio.Event()
 GAME = asyncio.Event()
 
@@ -71,7 +70,6 @@ def closing_protocol():
     GAME.clear()
     loop.stop()
     save_data()
-    # await asyncio.sleep(1)
     root.destroy()
 
 root.protocol("WM_DELETE_WINDOW", closing_protocol)
@@ -80,7 +78,6 @@ root.protocol("WM_DELETE_WINDOW", closing_protocol)
 async def main_update_loop():
     while True:
         await asyncio.sleep(0.01)
-        # print(1)
         root.update()
 
 
@@ -89,6 +86,5 @@ def START():
     from .elements import Init
     asyncio.ensure_future(main_update_loop())
     root.update()
-    # print(1)
     Init()
     loop.run_forever()

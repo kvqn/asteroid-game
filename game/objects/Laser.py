@@ -22,7 +22,6 @@ class Laser_Beam:
             ticks = (self.y_coord.value - j.y_coord.value)//24
             self.queue_detonation(ticks)
             j.queue_detonation(ticks)
-            # SCORE.set(SCORE.get() + 1)
             active_asteroids.remove(j)
         else:
             active_beams.add(self)
@@ -47,7 +46,6 @@ class Laser_Beam:
         self.update_task.cancel()
         self.lookout_task.cancel()
         canvas.delete(self.tag)
-        # print("detonated laser.")
         del self
 
     def queue_detonation(self, ticks):
@@ -66,7 +64,6 @@ class Laser_Beam:
                 active_beams.remove(self)
             except KeyError:
                 pass
-            # print("Destroyed laser.")
             self.lookout_task.cancel()
             try:
                 self.detonation_task.cancel()

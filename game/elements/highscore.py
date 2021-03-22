@@ -13,7 +13,6 @@ def init():
     HighscoreHeadingLabel.place(x=10, y=90)
     evaluate_highscores()
     asyncio.ensure_future(lookout_for_new_game())
-    # print('highscore loaded')
 
 async def lookout_for_new_game():
     global HighscoreLabels
