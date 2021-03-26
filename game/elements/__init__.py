@@ -8,23 +8,18 @@ SCORE = tkinter.IntVar(value=0)
 LEVEL = tkinter.IntVar(value=1)
 PLAYER_NAME = tkinter.StringVar()
 
-import pickle
+import mysql.connector
 
-try:
-    with open("save.dat", 'rb') as file:
-        DATA = pickle.load(file)
-    if not isinstance(DATA, dict):
-        DATA = dict()
-except FileNotFoundError:
-    DATA = dict()
-except EOFError:
-    DATA = dict()
+conn = mysql.connector.connect(user='root', password='password', host='localhost', database='asteroidgame')
+
+cur = conn.cursor()
+cur.execute("create table if not exists scores(name char(20) unique, score int(3));")
+conn.commit()
 
 def save_data():
-    if not PLAYER_NAME.get() in DATA or SCORE.get() > DATA[PLAYER_NAME.get()]:
-        DATA[PLAYER_NAME.get()] = SCORE.get()
-        with open("save.dat", 'wb') as file:
-            pickle.dump(DATA, file)
+    if not PLAYER_NAME.get() == '':
+        cur.execute(f"""INSERT INTO scores (name, score) VALUES ("{PLAYER_NAME.get()}", {str(SCORE.get())}) ON DUPLICATE KEY UPDATE score=VALUES(score);""")
+        conn.commit()
 
 def Init():
     from .bar import init

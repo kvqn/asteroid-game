@@ -2,7 +2,7 @@ import tkinter
 import pickle
 import asyncio
 from .. import canvas, root, NEW_GAME_EVENT
-from . import DATA
+from . import cur
 
 
 HighscoreLabels = []
@@ -25,8 +25,10 @@ async def lookout_for_new_game():
     
 
 def evaluate_highscores():
-    HIGHSCORES = list(DATA.items())
-    HIGHSCORES.sort(reverse=True, key= lambda e : e[1])
+    cur.execute("SELECT * FROM scores ORDER BY score DESC;")
+    HIGHSCORES = cur.fetchall()
+    # HIGHSCORES = list(DATA.items())
+    # HIGHSCORES.sort(reverse=True, key= lambda e : e[1])
     _ = 0
     for i in HIGHSCORES:
         _+=1
