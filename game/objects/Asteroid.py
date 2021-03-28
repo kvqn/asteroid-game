@@ -36,8 +36,6 @@ explosion_images = (
     Get_Image("assets/explosions/explosion_7.png")
 )
 
-level_up_image = Get_Image("assets/level_up.png")
-
 class Asteroid: # Asteroid class that takes care of all its properties
     def __init__(self):
         self.x_coord = randint(80, 800)
