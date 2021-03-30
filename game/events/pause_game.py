@@ -5,7 +5,7 @@ import asyncio
 
 def pause_game(e): # called when game is paused
     GAME.clear()
-    asyncio.ensure_future(animated_effect(x=300, y=150, image_object=pause_image, small_tick_delay=4))
+    asyncio.ensure_future(animated_effect(x=270, y=150, image_object=pause_image, small_tick_delay=4))
     save_quit_button.place(x=650, y=450)
     save_quit_button.lift()
     resume_button.place(x=650, y=400)
@@ -21,7 +21,6 @@ def resume_game(e): # called when game is resumed
 from ..elements import save_data, conn
  
 def save_and_quit():
-    save_data()
     conn.close()
     loop.stop()
     root.destroy()
