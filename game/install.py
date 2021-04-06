@@ -1,8 +1,24 @@
 import subprocess
 from tkinter import font
+import sys
+import platform
 
 def INSTALL():
 
+    # Installing pymysql if not already installed
+
+    try:
+        import pymysql
+    except ImportError:
+        print("pymysql module is not installed. Installing now.")
+        subprocess.run((sys.executable, '-m', 'pip', 'install', 'pymysql', 'cryptography'))
+        
+        try:
+            import pymysql
+        except:
+            print("Could not install pymysql module automatically. Please install manually.")    
+            exit()
+        
     # Installing PIL if not already installed.
     # PIL is an imaging library that is used here for loading of saved images.
 
@@ -10,7 +26,6 @@ def INSTALL():
         import PIL
     except ImportError:
         print("PIL module not installed. Installing now.")
-        import sys
         subprocess.run((sys.executable, '-m', 'pip', 'install', 'pillow'))
     
         try:
@@ -26,7 +41,6 @@ def INSTALL():
     
     if "LLPixel" not in font.families():
         print("Font not installed. Installing now.")
-        import platform
         system = platform.system()
         if system == "Windows":
             subprocess.run(('copy', '/Y', 'assets/LLPixel3.ttf', '%WINDIR%/Fonts'))

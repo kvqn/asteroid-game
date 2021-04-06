@@ -8,9 +8,9 @@ SCORE = tkinter.IntVar(value=0)
 LEVEL = tkinter.IntVar(value=1)
 PLAYER_NAME = tkinter.StringVar()
 
-import mysql.connector
+import pymysql
 
-conn = mysql.connector.connect(user='root', password='password', host='localhost', database='asteroidgame')
+conn = pymysql.connect(user='root', password='password', host='localhost', database='asteroidgame')
 
 cur = conn.cursor()
 cur.execute("create table if not exists scores(name char(20) unique, score int(3));")
