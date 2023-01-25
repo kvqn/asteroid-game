@@ -1,8 +1,8 @@
 import tkinter
-import pickle
 import asyncio
 from .. import canvas, root
-from . import cur
+from . import JSON_SAVE_PATH
+import json
 
 
 HighscoreLabels = []
@@ -19,11 +19,15 @@ def reinit():
         i.place_forget()
     HighscoreLabels = []
     evaluate_highscores()
-    
+
 
 def evaluate_highscores():
-    cur.execute("SELECT * FROM scores ORDER BY score DESC;")
-    HIGHSCORES = cur.fetchall()
+    try:
+        with open(JSON_SAVE_PATH, 'r') as f:
+            data = json.load(f)
+        HIGHSCORES = list(data.items())
+    except:
+        HIGHSCORES = []
     j = 0
     for i in HIGHSCORES:
         j+=1

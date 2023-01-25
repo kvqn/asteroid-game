@@ -18,10 +18,9 @@ def resume_game(e): # called when game is resumed
     resume_button.place_forget()
     root.bind("<Escape>", pause_game)
 
-from ..elements import save_data, conn
- 
+from ..elements import save_data
+
 def save_and_quit():
-    conn.close()
     loop.stop()
     root.destroy()
 

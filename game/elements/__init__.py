@@ -2,24 +2,33 @@
 # The other files in this folder deal with loading different UI elements
 
 import tkinter
+import traceback
+import json
+import os
+import game
 
 
 SCORE = tkinter.IntVar(value=0)
 LEVEL = tkinter.IntVar(value=1)
 PLAYER_NAME = tkinter.StringVar()
-
-import pymysql
-
-conn = pymysql.connect(user='root', password='password', host='localhost', database='asteroidgame')
-
-cur = conn.cursor()
-cur.execute("create table if not exists scores(name char(20) unique, score int(3));")
-conn.commit()
+JSON_SAVE_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(game.__file__))), 'scores.json')
 
 def save_data():
-    if not PLAYER_NAME.get() == '':
-        cur.execute(f"""INSERT INTO scores (name, score) VALUES ("{PLAYER_NAME.get()}", {str(SCORE.get())}) ON DUPLICATE KEY UPDATE score=VALUES(score);""")
-        conn.commit()
+    name = PLAYER_NAME.get()
+    if not name == '':
+        try:
+            with open(JSON_SAVE_PATH, 'r') as f:
+                data = json.load(f)
+            if name in data:
+                if data[name] < SCORE.get():
+                    data[name] = SCORE.get()
+            else:
+                data[name] = SCORE.get()
+        except FileNotFoundError:
+            data = {name: SCORE.get()}
+
+        with open(JSON_SAVE_PATH, 'w') as f:
+            json.dump(data, f, indent=4)
 
 def Init():
     from .bar import init
